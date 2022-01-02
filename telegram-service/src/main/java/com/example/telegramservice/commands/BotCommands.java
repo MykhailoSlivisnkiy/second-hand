@@ -1,9 +1,15 @@
 package com.example.telegramservice.commands;
 
 public enum BotCommands {
-    HELLO, NEW_MERCHANDISE;
+    HELLO("/hello"), NEW_MERCHANDISE("/get_new"), CHAT_ID("/chartId");
 
-    BotCommands() {
+    private String commandName;
 
+    BotCommands(String commandName) {
+        this.commandName = commandName;
+    }
+
+    public String getCommandName() {
+        return commandName;
     }
 }

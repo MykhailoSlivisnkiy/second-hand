@@ -34,45 +34,22 @@ public class Bot extends TelegramLongPollingBot {
 
     public void onUpdateReceived(Update update) {
         update.getUpdateId();
-        SendMessage.SendMessageBuilder builder = SendMessage.builder();
         String messageText;
         String chatId;
 
         if (update.getMessage() != null) {
             chatId = update.getMessage().getChatId().toString();
-            builder.chatId(chatId);
             messageText = update.getMessage().getText();
         } else {
             chatId = update.getChannelPost().getChatId().toString();
-            builder.chatId(chatId);
             messageText = update.getChannelPost().getText();
         }
 
-        if (messageText.contains("/hello")) {
-            builder.text("Привет твій id " + chatId);
-            try {
-                execute(builder.build());
-            } catch (TelegramApiException e) {
-                log.debug(e.toString());
-            }
-        }
 
-        if (messageText.contains("/chartId")) {
-            builder.text("ID Канала : " + chatId);
-            try {
-                execute(builder.build());
-            } catch (TelegramApiException e) {
-                log.debug(e.toString());
-            }
-        }
-
-        if (messageText.contains("/command")) {
-            builder.text("You won't believe it works");
-            try {
-                execute(builder.build());
-            } catch (TelegramApiException e) {
-                log.debug(e.toString());
-            }
+        try {
+            execute(BotMessageBuilder.buildMessage(messageText, chatId));
+        } catch (TelegramApiException e) {
+            log.debug(e.toString());
         }
     }
 
