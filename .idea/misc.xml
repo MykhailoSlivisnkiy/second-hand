@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/../email-service/pom.xml" />
         <option value="$PROJECT_DIR$/telegram-service/pom.xml" />
+        <option value="$PROJECT_DIR$/subsciption-service/pom.xml" />
       </list>
     </option>
   </component>

@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../email-service/email-service.iml" filepath="$PROJECT_DIR$/../email-service/email-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/subsciption-service/subsciption-service.iml" filepath="$PROJECT_DIR$/subsciption-service/subsciption-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/telegram-service/subscription-service.iml" filepath="$PROJECT_DIR$/telegram-service/subscription-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/telegram-service/telegram-service.iml" filepath="$PROJECT_DIR$/telegram-service/telegram-service.iml" />
     </modules>
   </component>

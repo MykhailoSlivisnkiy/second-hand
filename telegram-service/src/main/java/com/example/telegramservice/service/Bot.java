@@ -1,23 +1,21 @@
 package com.example.telegramservice.service;
 
 import com.example.telegramservice.config.BotConfig;
-import lombok.extern.slf4j.Slf4j;
+import com.example.telegramservice.service.messageSender.BotMessageBuilder;
+import com.example.telegramservice.service.messageSender.MessageSender;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
-@Slf4j
+@AllArgsConstructor
 public class Bot extends TelegramLongPollingBot {
 
     private final BotConfig config;
+    private final MessageSender messageSender;
     private final String test = "662449862";
-
-    public Bot(BotConfig config) {
-        this.config = config;
-    }
 
     public void send(String text) {
         var message = SendMessage.builder()
@@ -25,11 +23,7 @@ public class Bot extends TelegramLongPollingBot {
                 .text(text)
                 .build();
 
-        try {
-            execute(message);
-        } catch (TelegramApiException e) {
-            log.debug(e.toString());
-        }
+        messageSender.sendMessage(message);
     }
 
     public void onUpdateReceived(Update update) {
@@ -45,12 +39,7 @@ public class Bot extends TelegramLongPollingBot {
             messageText = update.getChannelPost().getText();
         }
 
-
-        try {
-            execute(BotMessageBuilder.buildMessage(messageText, chatId));
-        } catch (TelegramApiException e) {
-            log.debug(e.toString());
-        }
+        messageSender.sendMessage(BotMessageBuilder.buildMessage(messageText, chatId));
     }
 
 
